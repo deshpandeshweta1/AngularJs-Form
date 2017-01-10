@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="test">
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body ng-controller="testController">
+
+  <form name="userForm" class="form" novalidate>
+
+    <div class="formDiv">
+
+      <label>Begin:</label>
+      <input type="number" name="begin" ng-model="begin" min="0" max="99" required>
+      <span class="error" ng-show="userForm.begin.$error.min || userForm.begin.$error.max">
+        Range: 0 - 99</span>
+    </div>
+
+    <div>
+      <label>End:</label>
+      <input type="number" name="end" ng-model="end" min="2" max="100" required>
+      <span class="error" ng-show="userForm.end.$error.min || userForm.end.$error.max">
+         Range: 2 - 100</span>
+    </div>
+    <div><span class="error" ng-show="begin>=end && begin !='' && end!=''">
+         <br/>Begin should be less than End</span></div>
+    <button class="btn" type="cancel" ng-click="clear()">Cancel</button>
+
+    <button ng-class="{'diabled-class': begin>=end || userForm.$invalid }" class="btn" type="submit" ng-disabled="userForm.$pristine|| userForm.$invalid" ng-click="submit()">Submit</button>
+
+    <p>{{message}}</p>
+  </form>
+
+</body>
+
+</html>
